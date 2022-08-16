@@ -1,0 +1,56 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header_item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background-color: #6b705c   ;
+}
+.header_logo{
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #b7b7a4;
+}
+
+.nav_list{
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.list_item{
+    list-style: none;
+}
+
+.list_item_link{
+    text-decoration: none;
+    color: #b7b7a4;
+}
+
+.list_item_link:hover{
+    color: #cb997e  ;
+}
+
+
+/* main tad  start */
+
+main{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.login_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* main tad end */
