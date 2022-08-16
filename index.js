@@ -2,6 +2,8 @@
 import express from 'express'
 import {engine} from 'express-handlebars'
 import mysql from 'mysql2/promise'
+import session from 'express-session'
+import auth from './midllewear/auth.js'
 
 
 const app = express()
@@ -13,6 +15,23 @@ app.use('/publick', express.static('publick'))
 app.use(express.urlencoded({
     extends: true
 }))
+
+
+// lets use session module configuration
+
+app.use(session({
+    secret:'stasiukynai',
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        
+        maxAge: 60000
+        
+    }
+
+}))
+
+
 
 
 
@@ -59,24 +78,38 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
 
-    const userData = req.body
+    try {
 
-    const user = await connection.query(`SELECT * FROM user WHERE email = '${userData.email}' AND password = '${userData.passwors}' `)
+        const userData = req.body
 
-    if(user[0].length >=1 )
-    return res.redirect('/admin')
+        const user = await connection.query(`SELECT * FROM user WHERE email = '${userData.email}' AND password = '${userData.passwors}' `)
+    
+        if(!user[0].length >=1 )
+        return res.render('login', {message:'Blogi prisijungimo duomenys'})
 
 
-    return  res.render('login')
+        req.session.loggedIn = true
+        return  res.redirect('/admin')
+        
+    } catch {
+        
+    }
+   
+
+    
 })
 
 //login handlebars end
 
 //Admin handlebars start
 
-app.get('/admin', (req, res) => {
+app.get('/admin',(auth), async (req, res) => {
 
-    res.render('admin')
+    const machines = await connection.query(`SELECT id, machine_name, about, img FROM warMachines`)
+
+
+
+    res.render('admin', {machines: machines[0]})
 })
 
 //Admin handlebars end
