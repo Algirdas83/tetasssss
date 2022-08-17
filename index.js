@@ -1,9 +1,10 @@
 // import { constants } from 'buffer'
 import express from 'express'
 import {engine} from 'express-handlebars'
-import mysql from 'mysql2/promise'
+// import mysql from 'mysql2/promise'
 import session from 'express-session'
 import auth from './midllewear/auth.js'
+import connection from './database/connect.js'
 
 
 const app = express()
@@ -42,13 +43,18 @@ app.set('views', './views');
 
 // Lets connect to mysql data base
 
-const connection = await mysql.createConnection({
+// const connection = await mysql.createConnection({
 
-    host: 'localhost',
-    user:'root',     
-    password: '',  
-    database: 'steel'
-})
+//     host: 'localhost',
+//     user:'root',     
+//     password: '',  
+//     database: 'steel'
+// })
+
+
+// Jungimasisi prie isorinio  serverio
+
+
 
 const port = process.env.Port || 3000
 
