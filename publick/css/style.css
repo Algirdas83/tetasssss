@@ -15,6 +15,11 @@ body{
     color: #b7b7a4;
 }
 
+.header_logo a {
+    text-decoration: none;
+    color: #b7b7a4 ;
+}
+
 .nav_list{
 
     display: flex;
@@ -50,6 +55,8 @@ main{
     justify-content: center;
     align-items: center;
 }
+
+
 
 
 
