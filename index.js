@@ -1,10 +1,19 @@
+// Object Orienteited progrmamig vadovaujas archutekturine metadologija MVC
+
+// MVC issisifruoja kaip:
+//Model atsakingas uz duomenu strukturos perdavima (kitaip duomenu padavimas, paemimas), viskas yra susije su kreipimusi i duomenu baza
+//View kaip pavizdys yra musu handlebars sablonai
+//Controller kontroleris tai yra visi musu sukurti routai
+
+// import mysql from 'mysql2/promise'
 // import { constants } from 'buffer'
 import express from 'express'
 import {engine} from 'express-handlebars'
-// import mysql from 'mysql2/promise'
 import session from 'express-session'
-import auth from './midllewear/auth.js'
-import connection from './database/connect.js'
+import admin from './controller/admin.js'
+import home from './controller/home.js'
+import login from './controller/login.js'
+
 
 
 const app = express()
@@ -17,9 +26,7 @@ app.use(express.urlencoded({
     extends: true
 }))
 
-
 // lets use session module configuration
-
 app.use(session({
     secret:'stasiukynai',
     resave: false,
@@ -32,18 +39,21 @@ app.use(session({
 
 }))
 
-
-
-
-
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+// routo home importinimo konfigas
+app.use(home)
+// routo login importinimo konfigas
+app.use(login)
+// routo admin importinimo konfigas
+app.use(admin)
+
 
 // Lets connect to mysql data base
 
-// const connection = await mysql.createConnection({
+// const database = await mysql.createdatabase({
 
 //     host: 'localhost',
 //     user:'root',     
@@ -62,64 +72,6 @@ const port = process.env.PORT || 3000
 
 
 
-
-//home handlebars start
-app.get('/', async (req, res) => {
-
-    const user = await connection.query(`SELECT machine_name, about, img FROM warMachines  `)
-
-    res.render('home', {machines: user[0]})
-})
-
-//home handlebars end
-
-
-//login handlebars start
-
-
-app.get('/login', (req, res) => {
-
-    res.render('login')
-
-})
-
-app.post('/login', async (req, res) => {
-
-    try {
-
-        const userData = req.body
-
-        const user = await connection.query(`SELECT * FROM user WHERE email = '${userData.email}' AND password = '${userData.passwors}' `)
-    
-        if(!user[0].length >=1 )
-        return res.render('login', {message:'Blogi prisijungimo duomenys'})
-
-
-        req.session.loggedIn = true
-        return  res.redirect('/admin')
-        
-    } catch {
-        
-    }
-   
-
-    
-})
-
-//login handlebars end
-
-//Admin handlebars start
-
-app.get('/admin',(auth), async (req, res) => {
-
-    const machines = await connection.query(`SELECT id, machine_name, about, img FROM warMachines`)
-
-
-
-    res.render('admin', {machines: machines[0]})
-})
-
-//Admin handlebars end
 
 
 
