@@ -125,3 +125,7 @@ app.get('/admin',(auth), async (req, res) => {
 
 
 app.listen(port)
+
+
+
+// hroku page adresas https://app-wartechnic.herokuapp.com/
