@@ -58,10 +58,9 @@ const connection = await mysql.createConnection({
 //home handlebars start
 app.get('/', async (req, res) => {
 
-    const user = await connection.query(`SELECT name, email, password FROM user  `)
+    const user = await connection.query(`SELECT machine_name, about, img FROM warMachines  `)
 
-    console.log(user[0]);
-    res.render('home')
+    res.render('home', {machines: user[0]})
 })
 
 //home handlebars end
