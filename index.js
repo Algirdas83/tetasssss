@@ -50,6 +50,8 @@ const connection = await mysql.createConnection({
     database: 'steel'
 })
 
+const port = process.env.Port || 3000
+
 
 
 
@@ -116,4 +118,4 @@ app.get('/admin',(auth), async (req, res) => {
 
 
 
-app.listen(3000)
+app.listen(port)
