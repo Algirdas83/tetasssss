@@ -1,0 +1,18 @@
+
+<div class="container">
+
+    <form method="post">
+        {{#each change}}
+        <input type="text" name="name" value="{{machine_name}}">
+        <label>Pavadinimas</label>
+        <input type="text" name="about" value="{{about}}">
+        <label>Apie</label>
+        <input type="file" name="image" value="{{img}}">
+        <label>Nuotrauka</label>
+        {{/each}}
+
+        <button class="btn btn-success">Atnaujinti</button>
+
+    </form>
+
+</div>

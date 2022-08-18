@@ -13,8 +13,7 @@ import session from 'express-session'
 import admin from './controller/admin.js'
 import home from './controller/home.js'
 import login from './controller/login.js'
-
-
+import imageUploade from './middlewarer/uploade.js'
 
 const app = express()
 

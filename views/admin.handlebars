@@ -9,7 +9,7 @@
                 <th scope="col">Machine</th>
                 <th scope="col">Img</th>
                 <th scope="col">Bout machine</th>
-                <th><a class="btn btn-warning" href=""> Prideti</a></th>
+                <th><a class="btn btn-warning" href="/admin/add"> Prideti</a></th>
                 <th></th>
 
             </tr>
@@ -20,17 +20,13 @@
             <tr>
                  <td>{{id}}</td>
                 <td>{{machine_name}}</td>
-                <td>{{img}}</td>
+                <td><img src="{{img}}" alt="{{machine_name}}" width="300px"></td>
                 <td>{{about}}</td>
-                <td><a class="btn btn-danger" href="">Trinti</a></td>
-                <td><a class="btn btn-success" href="">Redaguoti</a></td>
-                
-
+                <td><a class="btn btn-danger" href="/admin/delete/{{id}}">Trinti</a></td>
+                <td><a class="btn btn-success" href="/admin/edit/{{id}}">Redaguoti</a></td>
             </tr>
-               
-
-            
             {{/each}}
+            
         </tbody>
     </table>
 
